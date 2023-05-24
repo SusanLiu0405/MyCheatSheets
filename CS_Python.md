@@ -148,6 +148,16 @@ and or not
 
 
 
+表示空：
+
+数组为空`arr == None`
+
+表示无穷：
+
+`a = float('inf')`
+
+
+
 Binary Search二分查找
 
 ```python
