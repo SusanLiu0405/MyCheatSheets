@@ -1,0 +1,56 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> output_traversal_result = new ArrayList<List<Integer>>();
+
+        while(root == null){
+            return output_traversal_result;
+        }  
+        queue.add(root);
+        
+        int level = 0;
+
+        while (!queue.isEmpty()) {  // queue = []
+            output_traversal_result.add(new ArrayList<Integer>());
+            int i = 0;
+            int level_length = queue.size();
+            while (i < level_length) {
+                TreeNode parent = queue.removeFirst();   // parent = 3 ; queue = [];
+                output_traversal_result.get(level).add(parent.val);   // traversal_result = [3];
+                if(level % 2 != 0){
+                    if (parent.left != null) {
+                        queue.add(parent.left); // queue = [];
+                    }
+                    if (parent.right != null) {
+                        queue.add(parent.right);    //queue = [];
+                    }
+                } else {
+                    if (parent.right != null) {
+                        queue.add(parent.right);    //queue = [];
+                    }
+                    if (parent.left != null) {
+                        queue.add(parent.left); // queue = [];
+                    }
+                }
+                i++;
+            }
+            level++;
+        }
+        return output_traversal_result;
+    }
+}

@@ -1,0 +1,46 @@
+import java.net.StandardSocketOptions;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> output_traversal_result = new ArrayList<List<Integer>>();
+
+
+        while (root == null) {
+            return output_traversal_result;
+        }
+
+        queue.add(root);
+        int level = 0;
+        while (!queue.isEmpty()) {
+            output_traversal_result.add(new ArrayList<Integer>());
+            int level_index = 0;
+            int level_length = queue.size();
+            while (level_index < level_length) {
+                System.out.println("Current level_index="+level_index);
+                TreeNode parent = queue.removeFirst();   // parent = 3 ; queue = [3];
+                System.out.println("Current TreeNodeParent="+parent.val);
+                output_traversal_result.get(level).add(parent.val);   // output_traversal_result = [3];
+                System.out.println("Current OutputTraversalResult="+output_traversal_result);
+                if (parent.right != null) {
+                    queue.add(parent.right); // queue = [3];
+                    System.out.println("Added the right children of parent node:"+parent.right);
+                    System.out.println("Queue:"+queue);
+                }
+                if (parent.left != null) {
+                    queue.add(parent.left);    //queue = [];
+                    System.out.println("Added the left children of parent node:"+parent.left);
+                    System.out.println("Queue:"+queue);
+                }
+                level_index++;
+            }
+            level++;
+            System.out.printf("Ended the traversal of level"+level);
+            System.out.println("-------------------------------");
+        }
+        return output_traversal_result;
+    }
+}
